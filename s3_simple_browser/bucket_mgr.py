@@ -71,7 +71,7 @@ def delete_object(bucket_name, key):
     print(f"{key} has been deleted")
 
 
-class Bucket():
+class Bucket:
     name = ""
     created_date = None
 
@@ -80,7 +80,7 @@ class Bucket():
         self.last_modified = last_modified
 
 
-class Path():
+class Path:
     key = ""
     normalized_key = ""
 
@@ -89,7 +89,7 @@ class Path():
         self.normalized_key = normalized_key
 
 
-class Item():
+class Item:
     key = ""
     normalized_key = ""
     last_modified = None
