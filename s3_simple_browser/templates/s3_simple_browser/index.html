@@ -13,7 +13,7 @@
 {% if bucket_list %}
 <ul>
     {% for bucket in bucket_list %}
-    <li><a href="bucket/{{ question.name }}"> {{ bucket.name }} </a> created {{ bucket.created_date }}</li>
+    <li><a href="bucket/{{ bucket.name }}"> {{ bucket.name }} </a> created {{ bucket.created_date }}</li>
     {% endfor %}
 </ul>
 {% else %}
