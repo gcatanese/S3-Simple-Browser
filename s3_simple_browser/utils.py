@@ -23,7 +23,10 @@ def get_paths(objects):
         s = obj.split("/")
         if len(s) > 1:
             key = '/'.join(s[:len(s) - 1])
-            ret.append(Path(key, sanitize_key(key)))
+            path = Path(key, sanitize_key(key))
+
+            if path not in ret:
+                ret.append(path)
 
     return ret
 
@@ -35,3 +38,6 @@ class Path:
     def __init__(self, key, normalized_key):
         self.key = key
         self.normalized_key = normalized_key
+
+    def __eq__(self, other):
+        return self.key == other.key

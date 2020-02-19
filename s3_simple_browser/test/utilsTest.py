@@ -28,5 +28,18 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual("b", paths[2].key)
         self.assertEqual("b", paths[2].normalized_key)
 
+    def test_get_duplicate_paths(self):
+        paths = get_paths(["b/file1.txt", "b/file2.pdf", "c/file.json"])
+
+        self.assertIsNotNone(paths)
+        self.assertEqual(3, len(paths))
+        self.assertEqual(".", paths[0].key)
+        self.assertEqual(".", paths[0].normalized_key)
+        self.assertEqual("b", paths[1].key)
+        self.assertEqual("b", paths[1].normalized_key)
+        self.assertEqual("c", paths[2].key)
+        self.assertEqual("c", paths[2].normalized_key)
+
+
 if __name__ == '__main__':
     unittest.main()
