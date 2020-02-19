@@ -81,7 +81,7 @@ def upload_object(bucket_name, key, filename):
 
     print(f"File {filename} has been uploaded to " + key)
 
-    return filename
+    return key
 
 
 class Bucket:

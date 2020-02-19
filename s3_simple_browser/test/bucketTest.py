@@ -34,6 +34,12 @@ class BucketTest(unittest.TestCase):
         self.assertIsNotNone(filename)
         self.assertEqual("/tmp/file.txt", filename)
 
+    def test_upload(self):
+        filename = upload_object("data-bucket", "a/newfile.txt", "/tmp/file.txt")
+
+        self.assertIsNotNone(filename)
+        self.assertEqual("a/newfile.txt", filename)
+
 
 if __name__ == '__main__':
     unittest.main()
