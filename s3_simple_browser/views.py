@@ -72,4 +72,28 @@ def delete(request, bucket_name, object_key):
     return HttpResponse(template.render(context, request))
 
 
+def download(request, bucket_name, object_key):
+
+    object_key = rebuild_key(object_key)
+
+    filename = download_object(bucket_name, object_key, "/tmp")
+
+    template = loader.get_template('s3_simple_browser/message.html')
+    context = {
+        'message': 'Object ' + object_key + ' has been download to ' + filename
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def upload(request, bucket_name, object_key):
+
+    object_key = rebuild_key(object_key)
+
+    filename = upload_object(bucket_name, object_key, "/tmp/file.txt")
+
+    template = loader.get_template('s3_simple_browser/message.html')
+    context = {
+        'message': 'File ' + object_key + ' has been download to ' + filename
+    }
+    return HttpResponse(template.render(context, request))
 

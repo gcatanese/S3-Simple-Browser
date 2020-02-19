@@ -43,24 +43,6 @@ def item_key_list(bucket_name, prefix=""):
     return ret
 
 
-def get_paths(objects):
-
-    ret = [Path(".", ".")]
-
-    for obj in objects:
-        s = obj.split("/")
-        if len(s) > 1:
-            key = '/'.join(s[:len(s) - 1])
-            ret.append(Path(key, sanitize_key(key)))
-
-    return ret
-
-
-def get_path(key):
-    s = key.split("/")
-    return "/".join(s[:len(s) - 1])
-
-
 def delete_object(bucket_name, key):
     key = rebuild_key(key)
 
@@ -71,6 +53,37 @@ def delete_object(bucket_name, key):
     print(f"{key} has been deleted")
 
 
+def download_object(bucket_name, key, dest_folder):
+    key = rebuild_key(key)
+
+    print(key)
+
+    s3 = get_client()
+
+    filename = dest_folder + "/" + get_filename(key)
+    print(filename)
+
+    s3.download_file(Bucket=bucket_name, Key=key, Filename=filename)
+
+    print(f"Object {key} has been downloaded to " + filename)
+
+    return filename
+
+
+def upload_object(bucket_name, key, filename):
+    key = rebuild_key(key)
+
+    print(key)
+
+    s3 = get_client()
+
+    s3.upload_file(Bucket=bucket_name, Key=key, Filename=filename)
+
+    print(f"File {filename} has been uploaded to " + key)
+
+    return filename
+
+
 class Bucket:
     name = ""
     created_date = None
@@ -78,15 +91,6 @@ class Bucket:
     def __init__(self, name, last_modified):
         self.name = name
         self.last_modified = last_modified
-
-
-class Path:
-    key = ""
-    normalized_key = ""
-
-    def __init__(self, key, normalized_key):
-        self.key = key
-        self.normalized_key = normalized_key
 
 
 class Item:
