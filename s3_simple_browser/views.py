@@ -10,11 +10,9 @@ from django.template import loader
 def index(request):
     print(request)
 
-    latest_question_list = bucket_list
-
     template = loader.get_template('s3_simple_browser/index.html')
     context = {
-        'latest_question_list': latest_question_list,
+        'bucket_list': bucket_list,
     }
     return HttpResponse(template.render(context, request))
 
