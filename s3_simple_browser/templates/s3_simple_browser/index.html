@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    </style>
+</head>
+<body>
+
+<h2>S3 Simple Browser</h2>
+
+<h3>Bucket List</h3>
+
+{% if latest_question_list %}
+<ul>
+    {% for question in latest_question_list %}
+    <li><a href="bucket/{{ question.name }}"> {{ question.name }} </a> created {{ question.created_date }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No buckers found</p>
+{% endif %}
+</body>

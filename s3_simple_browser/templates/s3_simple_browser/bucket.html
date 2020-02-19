@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    </style>
+</head>
+<body>
+
+<h2>S3 Simple Browser</h2>
+
+<h3>{{ bucket_name }}</h3>
+
+{% if list %}
+<ul>
+    {% for l in list %}
+    <li> <a href="../container/{{ bucket_name }}/view/{{ l.normalized_key }}">{{ l.key }}</a>  </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No objects are found.</p>
+{% endif %}
+</body>

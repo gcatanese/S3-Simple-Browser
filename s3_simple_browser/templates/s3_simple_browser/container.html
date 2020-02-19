@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    </style>
+</head>
+<body>
+
+<h2>S3 Simple Browser</h2>
+
+<h3>{{ object_key }}</h3>
+
+{% if list %}
+<ul>
+    {% for l in list %}
+    <li> {{ l.key }} last modified {{ l.last_modified }}
+        <a href="download">Download</a>
+        <a href="/s3_simple_browser/container/{{ bucket_name }}/delete/{{ l.normalized_key }}">Delete</a> </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No objects are found.</p>
+{% endif %}
+</body>
