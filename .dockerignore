@@ -1,3 +1,6 @@
 # comment
 .env
 wiki
+Docker
+docker-compose.yml
+db.sqlite3
