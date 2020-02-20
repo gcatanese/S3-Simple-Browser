@@ -2,7 +2,7 @@
 Minimalist browser for Amazon S3, supporting also S3 on localstack.
 
 
-![Alt text](wiki/Buckets.jpg?raw=true "Title")
+![Alt text](wiki/buckets.jpg?raw=true "Title")
 
 ## Run on Docker
 
