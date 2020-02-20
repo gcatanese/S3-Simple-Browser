@@ -5,14 +5,14 @@ from s3_simple_browser.bucket_mgr import *
 class BucketTest(unittest.TestCase):
 
     def setUp(self):
-        from dotenv import load_dotenv
-        load_dotenv()
+         from dotenv import load_dotenv
+         load_dotenv()
 
     def test_bucket_list(self):
         list = bucket_list()
 
         self.assertIsNotNone(list)
-        self.assertEqual(1, len(list))
+        self.assertTrue(len(list) > 0)
 
     def test_item_list(self):
         list = item_list("data-bucket")
