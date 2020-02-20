@@ -50,6 +50,11 @@ class BucketTest(unittest.TestCase):
         self.assertIsNotNone(filename)
         self.assertEqual("a/newfile.txt", filename)
 
+    def test_exist_bucket(self):
+        ret = exist_bucket("data-bucketrr")
+
+        self.assertIsNotNone(ret)
+
 
 if __name__ == '__main__':
     unittest.main()
