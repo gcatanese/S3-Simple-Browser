@@ -24,10 +24,13 @@ def item_list(bucket_name, prefix=""):
 
     ret = []
 
-    for item in s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)['Contents']:
-        if prefix == get_path(item["Key"]):
-            normalized_key = sanitize_key(item["Key"]);
-            ret.append(Item(item["Key"], normalized_key, item["LastModified"], item["Size"]))
+    items = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+
+    if items["KeyCount"] > 0:
+        for item in items['Contents']:
+            if prefix == get_path(item["Key"]):
+                normalized_key = sanitize_key(item["Key"]);
+                ret.append(Item(item["Key"], normalized_key, item["LastModified"], item["Size"]))
 
     return ret
 
@@ -39,8 +42,11 @@ def item_key_list(bucket_name, prefix=""):
 
     ret = []
 
-    for item in s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)['Contents']:
-        ret.append(item["Key"])
+    items = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+
+    if items["KeyCount"] > 0:
+        for item in items['Contents']:
+            ret.append(item["Key"])
 
     return ret
 
@@ -58,7 +64,7 @@ def delete_object(bucket_name, key):
 def download_object(bucket_name, key, dest_folder):
     key = rebuild_key(key)
 
-    print(key)
+    print(f"dest_folder {dest_folder}")
 
     s3 = get_client()
 
