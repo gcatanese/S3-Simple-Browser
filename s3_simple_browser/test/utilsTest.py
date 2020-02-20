@@ -4,6 +4,10 @@ from s3_simple_browser.bucket_mgr import *
 
 class UtilsTest(unittest.TestCase):
 
+    def setUp(self):
+        from dotenv import load_dotenv
+        load_dotenv()
+
     def test_sanitize_key(self):
         self.assertEqual("a-b-c-file.txt", sanitize_key("a/b/c/file.txt"))
 

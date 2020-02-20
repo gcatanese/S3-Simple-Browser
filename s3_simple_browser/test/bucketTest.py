@@ -4,6 +4,10 @@ from s3_simple_browser.bucket_mgr import *
 
 class BucketTest(unittest.TestCase):
 
+    def setUp(self):
+        from dotenv import load_dotenv
+        load_dotenv()
+
     def test_bucket_list(self):
         list = bucket_list()
 
