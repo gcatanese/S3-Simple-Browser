@@ -3,14 +3,16 @@ from s3_simple_browser.utils import *
 
 
 def bucket_list():
-    print("bucket_list")
 
     s3 = get_client()
 
     ret = []
 
-    for bucket in s3.list_buckets()['Buckets']:
+    list = s3.list_buckets()['Buckets']
+    for bucket in list:
         ret.append(Bucket(bucket["Name"], bucket["CreationDate"]))
+
+    print(f"Found {len(list)} bucket(s)")
 
     return ret
 
