@@ -1,0 +1,33 @@
+version: '3.2'
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack_demo
+    ports:
+      - '4563-4599:4563-4599'
+      - '8055:8080'
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - './.localstack:/tmp/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      mydevs3_network:
+  s3-simple-browser:
+    image: gcatanese/s3-simple-browser:latest
+    container_name: s3-simple-browser
+    ports:
+      - '8080:8080'
+    environment:
+      - PYTHONUNBUFFERED=1
+      - AWS_ACCESS_KEY_ID=aws01
+      - AWS_SECRET_ACCESS_KEY=aws01
+      - S3_LOCALSTACK_URL=http://host.docker.internal:4572
+    networks:
+      mydevs3_network:
+
+networks:
+  mydevs3_network:
+      
