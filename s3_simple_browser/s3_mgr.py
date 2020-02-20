@@ -9,8 +9,6 @@ def get_client():
     aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
     s3_localstack_url = os.getenv('S3_LOCALSTACK_URL')
 
-    print(s3_localstack_url)
-
     if s3_localstack_url is None:
         s3 = session.client(
             service_name='s3',
