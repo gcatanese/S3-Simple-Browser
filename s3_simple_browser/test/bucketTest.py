@@ -21,7 +21,7 @@ class BucketTest(unittest.TestCase):
         self.assertTrue(len(list) > 0)
 
     def test_empty_item_list(self):
-        list = item_list("data-bucket2")
+        list = item_list("data-bucket-2")
 
         self.assertIsNotNone(list)
         self.assertTrue(len(list) == 0)
