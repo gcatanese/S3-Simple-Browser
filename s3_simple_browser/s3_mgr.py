@@ -25,3 +25,12 @@ def get_client():
         )
 
     return s3
+
+
+def get_download_folder():
+    download_folder = "/tmp"
+
+    if os.getenv('DOWNLOAD_FOLDER') is not None:
+        download_folder = os.getenv('DOWNLOAD_FOLDER')
+
+    return download_folder

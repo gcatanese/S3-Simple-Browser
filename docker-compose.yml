@@ -25,6 +25,7 @@ services:
       - AWS_ACCESS_KEY_ID=aws01
       - AWS_SECRET_ACCESS_KEY=aws01
       - S3_LOCALSTACK_URL=http://host.docker.internal:4572
+      - DOWNLOAD_FOLDER=./.s3s_download
     networks:
       mydevs3_network:
 

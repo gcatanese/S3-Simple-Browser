@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from s3_simple_browser.bucket_mgr import *
 from s3_simple_browser.utils import *
+from s3_simple_browser.s3_mgr import *
 
 from django.http import HttpResponse
 from django.template import loader
@@ -12,7 +13,7 @@ def index(request):
 
     template = loader.get_template('s3_simple_browser/index.html')
     context = {
-        'bucket_list': bucket_list,
+        'bucket_list': bucket_list(),
     }
     return HttpResponse(template.render(context, request))
 
@@ -74,7 +75,7 @@ def download(request, bucket_name, object_key):
 
     object_key = rebuild_key(object_key)
 
-    filename = download_object(bucket_name, object_key, "/tmp")
+    filename = download_object(bucket_name, object_key, get_download_folder())
 
     template = loader.get_template('s3_simple_browser/message.html')
     context = {
@@ -94,4 +95,7 @@ def upload(request, bucket_name, object_key):
         'message': 'File ' + object_key + ' has been download to ' + filename
     }
     return HttpResponse(template.render(context, request))
+
+
+
 
