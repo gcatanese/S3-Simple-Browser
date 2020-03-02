@@ -2,8 +2,8 @@ from s3_simple_browser.s3_mgr import *
 from s3_simple_browser.utils import *
 from botocore.exceptions import ClientError
 
-def bucket_list():
 
+def bucket_list():
     s3 = get_client()
 
     ret = []
@@ -93,13 +93,26 @@ def upload_object(bucket_name, key, filename):
 
 
 def exist_bucket(bucket_name):
-
     ret = False
 
     s3 = get_client()
 
     try:
         bucket = s3.head_bucket(Bucket=bucket_name)
+        ret = True
+    except ClientError as e:
+        print(e.response)
+
+    return ret
+
+
+def create_bucket(bucket_name):
+    ret = False
+
+    s3 = get_client()
+
+    try:
+        bucket = s3.create_bucket(Bucket=bucket_name)
         ret = True
     except ClientError as e:
         print(e.response)
