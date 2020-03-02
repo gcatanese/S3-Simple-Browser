@@ -81,8 +81,6 @@ def download_object(bucket_name, key, dest_folder):
 def upload_object(bucket_name, key, filename):
     key = rebuild_key(key)
 
-    print(key)
-
     s3 = get_client()
 
     s3.upload_file(Bucket=bucket_name, Key=key, Filename=filename)
