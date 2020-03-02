@@ -107,6 +107,7 @@ def exist_bucket(bucket_name):
 
 
 def create_bucket(bucket_name):
+
     ret = False
 
     s3 = get_client()
@@ -114,6 +115,8 @@ def create_bucket(bucket_name):
     try:
         bucket = s3.create_bucket(Bucket=bucket_name)
         ret = True
+
+        print(f"Created bucket {bucket_name}")
     except ClientError as e:
         print(e.response)
 
