@@ -48,7 +48,7 @@ def container(request, bucket_name, object_key):
 
     list = item_list(bucket_name, object_key)
 
-    folder = sanitize_key(get_path(object_key))
+    folder = sanitize_key(object_key)
 
     template = loader.get_template('s3_simple_browser/container.html')
     context = {
@@ -90,16 +90,18 @@ def upload(request, bucket_name, folder):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
 
+        print(f"upload filename:{myfile.name} folder:{folder}")
+
         fs = FileSystemStorage()
         fs.save(myfile.name, myfile)
 
         object_key = folder + "/" + myfile.name
 
-        filename = upload_object(bucket_name, object_key, "/tmp/file.txt")
+        filename = upload_object(bucket_name, object_key, myfile.name)
 
         template = loader.get_template('s3_simple_browser/message.html')
         context = {
-            'message': 'Object ' + object_key + ' has been uploaded to ' + filename
+            'message': 'Object ' + filename + ' has been uploaded'
         }
 
         return HttpResponse(template.render(context, request))
