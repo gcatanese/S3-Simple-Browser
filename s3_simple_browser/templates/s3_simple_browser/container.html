@@ -18,7 +18,17 @@
         <a href="/s3_simple_browser/container/{{ bucket_name }}/delete/{{ l.normalized_key }}">Delete</a> </li>
     {% endfor %}
 </ul>
+&nbsp;&nbsp;
+<form action="/s3_simple_browser/container/{{ bucket_name }}/upload/{{ folder }}" method="POST" class="post-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+</form>
 {% else %}
 <p>No objects are found.</p>
 {% endif %}
+
+<br/><br/>
+<p><a href="/s3_simple_browser/"> Back to Root </a></p>
+
 </body>

@@ -34,3 +34,5 @@ def get_download_folder():
         download_folder = os.getenv('DOWNLOAD_FOLDER')
 
     return download_folder
+
+

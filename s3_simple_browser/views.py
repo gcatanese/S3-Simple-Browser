@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.files.storage import FileSystemStorage
 
 from s3_simple_browser.bucket_mgr import *
 from s3_simple_browser.utils import *
@@ -32,7 +33,6 @@ def bucket(request, bucket_name):
 
 
 def root(request, bucket_name):
-
     list = item_list(bucket_name)
 
     template = loader.get_template('s3_simple_browser/container.html')
@@ -44,22 +44,23 @@ def root(request, bucket_name):
 
 
 def container(request, bucket_name, object_key):
-
     object_key = rebuild_key(object_key)
 
     list = item_list(bucket_name, object_key)
+
+    folder = sanitize_key(get_path(object_key))
 
     template = loader.get_template('s3_simple_browser/container.html')
     context = {
         'list': list,
         'bucket_name': bucket_name,
-        'object_key': object_key
+        'object_key': object_key,
+        'folder': folder
     }
     return HttpResponse(template.render(context, request))
 
 
 def delete(request, bucket_name, object_key):
-
     object_key = rebuild_key(object_key)
 
     delete_object(bucket_name, object_key)
@@ -72,7 +73,6 @@ def delete(request, bucket_name, object_key):
 
 
 def download(request, bucket_name, object_key):
-
     object_key = rebuild_key(object_key)
 
     filename = download_object(bucket_name, object_key, get_download_folder())
@@ -84,18 +84,32 @@ def download(request, bucket_name, object_key):
     return HttpResponse(template.render(context, request))
 
 
-def upload(request, bucket_name, object_key):
+def upload(request, bucket_name, folder):
+    folder = rebuild_key(folder)
 
-    object_key = rebuild_key(object_key)
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
 
-    filename = upload_object(bucket_name, object_key, "/tmp/file.txt")
+        fs = FileSystemStorage()
+        fs.save(myfile.name, myfile)
 
-    template = loader.get_template('s3_simple_browser/message.html')
-    context = {
-        'message': 'File ' + object_key + ' has been download to ' + filename
-    }
-    return HttpResponse(template.render(context, request))
+        object_key = folder + "/" + myfile.name
 
+        filename = upload_object(bucket_name, object_key, "/tmp/file.txt")
 
+        template = loader.get_template('s3_simple_browser/message.html')
+        context = {
+            'message': 'Object ' + object_key + ' has been uploaded to ' + filename
+        }
+
+        return HttpResponse(template.render(context, request))
+
+    else:
+        template = loader.get_template('s3_simple_browser/message.html')
+        context = {
+            'message': 'File not found'
+        }
+
+        return HttpResponse(template.render(context, request))
 
 
