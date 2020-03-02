@@ -93,7 +93,7 @@ def upload(request, bucket_name, folder):
         print(f"upload filename:{myfile.name} folder:{folder}")
 
         fs = FileSystemStorage()
-        fs.save(myfile.name, myfile)
+        tmp_file= fs.save(myfile.name, myfile)
 
         object_key = folder + "/" + myfile.name
 
@@ -103,6 +103,8 @@ def upload(request, bucket_name, folder):
         context = {
             'message': 'Object ' + filename + ' has been uploaded'
         }
+
+        fs.delete(tmp_file)
 
         return HttpResponse(template.render(context, request))
 
