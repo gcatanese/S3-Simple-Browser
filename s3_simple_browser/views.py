@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 
 from s3_simple_browser.bucket_mgr import *
@@ -12,10 +11,16 @@ from django.template import loader
 def index(request):
     print(request)
 
+    buckets = bucket_list()
+
     template = loader.get_template('s3_simple_browser/index.html')
     context = {
-        'bucket_list': bucket_list(),
+        'bucket_list': buckets,
     }
+
+    if len(buckets) == 0:
+        create_bucket("data-bucket")
+
     return HttpResponse(template.render(context, request))
 
 
