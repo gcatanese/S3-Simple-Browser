@@ -1,7 +1,6 @@
 from django.urls import path
 
 from . import views
-from s3_simple_browser.bucket_mgr import *
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -12,14 +11,3 @@ urlpatterns = [
     path('container/<str:bucket_name>/download/<str:object_key>', views.download, name='message'),
     path('container/<str:bucket_name>/upload/<str:folder>', views.upload, name='message'),
 ]
-
-
-# create 'data-bucket' if no Bucket is found
-def on_startup():
-    print("on_startup")
-
-    if len(bucket_list()) == 0:
-        create_bucket("data-bucket")
-
-
-on_startup()
