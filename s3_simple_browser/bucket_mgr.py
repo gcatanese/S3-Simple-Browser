@@ -85,7 +85,7 @@ def upload_object(bucket_name, key, filename):
 
     s3.upload_file(Bucket=bucket_name, Key=key, Filename=filename)
 
-    print(f"File {filename} has been uploaded to " + key)
+    print(f"File {filename} has been uploaded to {bucket_name}:{key}")
 
     return key
 
