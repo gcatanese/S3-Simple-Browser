@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    </style>
+</head>
+<body>
+
+<h2>S3 Simple Browser</h2>
+
+<h3>{{ bucket_name }}: Add New</h3>
+
+<form action="/s3_simple_browser/addnew/{{ bucket_name }}" method="POST" class="post-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    Path: <input type="text" name="path" placeholder="a/b/c"><br/><br/>
+    File: <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+</form>
+
+
+<br/><br/>
+<p><a href="/s3_simple_browser/"> Back to Root </a></p>
+
+</body>
