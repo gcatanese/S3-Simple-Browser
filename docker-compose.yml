@@ -19,7 +19,7 @@ services:
     image: gcatanese/s3-simple-browser:latest
     container_name: s3-simple-browser
     ports:
-      - '8080:8080'
+      - '8081:8081'
     environment:
       - PYTHONUNBUFFERED=1
       - AWS_ACCESS_KEY_ID=aws01

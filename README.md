@@ -11,7 +11,7 @@ It supports navigation through buckets and upload, download and delete of S3 obj
 
 Provide your AWS credentials as env variables:
 ```
-docker run -it -p 8080:8080 
+docker run -it -p 8081:8081 
  -e AWS_ACCESS_KEY_ID=<aws access key id>> -e AWS_SECRET_ACCESS_KEY=<aws secret access key>  
     gcatanese/s3-simple-browser
 ```
