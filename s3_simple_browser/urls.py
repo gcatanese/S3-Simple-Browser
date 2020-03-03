@@ -10,4 +10,6 @@ urlpatterns = [
     path('container/<str:bucket_name>/delete/<str:object_key>', views.delete, name='message'),
     path('container/<str:bucket_name>/download/<str:object_key>', views.download, name='message'),
     path('container/<str:bucket_name>/upload/<str:folder>', views.upload, name='message'),
+    path('addnewform/<str:bucket_name>', views.addnewform, name='addnewform'),
+    path('addnew/<str:bucket_name>', views.addnew, name='addnew'),
 ]
