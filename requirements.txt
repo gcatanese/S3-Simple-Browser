@@ -1,4 +1,4 @@
-boto3==1.12.11
+boto3==1.12.12
 Django>=2.0,<4.0
 python-dotenv==0.12.0
 
