@@ -27,7 +27,7 @@ Configure environment variables accordingly.
 
 ## Run from source
 
-Clone the repository and add .env file in the root:  
+Clone the repository and add .env file in the root folder:  
 ```
 AWS_ACCESS_KEY_ID = aws01
 AWS_SECRET_ACCESS_KEY = aws01
