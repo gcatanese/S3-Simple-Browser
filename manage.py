@@ -2,10 +2,11 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+import django.core.management.commands.runserver as runserver
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
+    runserver.DEFAULT_PORT = "8888"
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
